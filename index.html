@@ -1,18 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vending Machine</title>
-    <link href="/dist/output.css" rel="stylesheet">
-  </head>
-  <body>
-      <h1 class="text-3xl font-bold underline">
-        Vending Machine Ramen
-      </h1>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vending Machine</title>
+  <link href="/dist/output.css" rel="stylesheet">
+</head>
+
+<body class="mx-auto">
+  <div class="container mx-auto p-4 bg-slate-500">
+    <h1 class="text-3xl font-bold text-center">
+      Vending Machine Ramen
+    </h1>
 
     <div>
       <h3>Food Items</h3>
+      <div class="flex flex-row gap-2">
+        <button class="basis-1/4 max-w-sm h-auto overflow-hidden shadow-lg rounded-lg">
+          <img class="w-full" src="img/menu/Tori Ramen/tori1.jpg" alt="Sunset in the mountains">
+          <div class="px-3 text-left">
+            <div class="font-bold text-lg">Tori Ramen 1</div>
+          </div>
+          <div class="flex flex-row px-3 pb-2">
+            <div>
+              <p class="py-1 text-left text-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+              <span
+                class="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+            </div>
+            <div
+              class="bg-green-100 text-green-800 me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">
+              <span
+                class="text-xs font-medium">Rp.
+                10,000</span>
+            </div>
+          </div>
+        </button>
+        <button class="basis-1/4 max-w-sm h-auto rounded overflow-hidden shadow-lg">
+          <img class="w-full" src="img/menu/Tori Ramen/tori1.jpg" alt="Sunset in the mountains">
+          <div class="px-6 py-4">
+            <div class="font-bold text-xl mb-2">Tori Ramen 1</div>
+          </div>
+          <div class="px-6 pt-4 pb-2">
+            <span
+              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+          </div>
+        </button>
+        <button class="basis-1/4 max-w-sm h-auto rounded overflow-hidden shadow-lg">
+          <img class="w-full" src="img/menu/Tori Ramen/tori1.jpg" alt="Sunset in the mountains">
+          <div class="px-6 py-4">
+            <div class="font-bold text-xl mb-2">Tori Ramen 1</div>
+          </div>
+          <div class="px-6 pt-4 pb-2">
+            <span
+              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+          </div>
+        </button>
+        <div class="basis-1/4">
+          <img src="img/Megumi Ramen logo.png" alt="">
+        </div>
+      </div>
+
       <button class="itemButton" onclick="selectItem('food', 'Item1')">Item1 ($5.00)</button>
       <button class="itemButton" onclick="selectItem('food', 'Item2')">Item2 ($7.50)</button>
       <button class="itemButton" onclick="selectItem('food', 'Item3')">Item3 ($10.00)</button>
@@ -46,6 +94,8 @@
       </thead>
       <tbody></tbody>
     </table>
-    <script src="js/script.js"></script>
-  </body>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+
 </html>
