@@ -1,10 +1,10 @@
 const prices = {
-  Item1: 5.0,
-  Item2: 7.5,
-  Item3: 10.0,
-  ItemA: 2.5,
-  ItemB: 3.0,
-  ItemC: 4.5,
+  Item1: 10000,
+  Item2: 10000,
+  Item3: 10000,
+  ItemA: 10000,
+  ItemB: 10000,
+  ItemC: 10000,
 };
 
 const selectedItemsTable = document
@@ -21,7 +21,14 @@ function selectItem(type, itemName) {
 }
 
 function processVending() {
-  const providedMoney = parseFloat(document.getElementById("money").value);
+  const selectedMoneyElement = document.querySelector(".money-option.selected");
+
+  if (!selectedMoneyElement) {
+    displayOutput("Please select a money option.");
+    return;
+  }
+
+  const providedMoney = parseFloat(selectedMoneyElement.dataset.value);
   const selectedItems = Array.from(selectedItemsTable.rows).map(
     (row) => row.cells[0].innerHTML
   );
@@ -47,6 +54,18 @@ function processVending() {
     }
   }
 }
+
+document.querySelectorAll(".money-option").forEach(function (moneyOption) {
+  moneyOption.addEventListener("click", function () {
+    // Remove the 'selected' class from all money options
+    document.querySelectorAll(".money-option").forEach(function (option) {
+      option.classList.remove("selected");
+    });
+
+    // Add the 'selected' class to the clicked money option
+    moneyOption.classList.add("selected");
+  });
+});
 
 function cancelTransaction() {
   resetVendingMachine();
