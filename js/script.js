@@ -1,10 +1,17 @@
 const prices = {
-  Item1: 10000,
+  tori1: 15000,
   Item2: 10000,
-  Item3: 10000,
+  tsuke1: 30000,
   ItemA: 10000,
   ItemB: 10000,
   ItemC: 10000,
+};
+
+const changeStock = {
+  5000: 20,
+  10000: 20,
+  20000: 20,
+  50000: 20,
 };
 
 const selectedItemsTable = document
@@ -17,7 +24,37 @@ function selectItem(type, itemName) {
   const cell1 = row.insertCell(0);
   const cell2 = row.insertCell(1);
   cell1.innerHTML = itemName;
-  cell2.innerHTML = `$${price.toFixed(2)}`;
+  cell2.innerHTML = `Rp. ${price.toFixed(2)}`;
+}
+
+function updateChangeStock(change) {
+  for (let denomination in changeStock) {
+    const numNotes = Math.floor(change / parseInt(denomination));
+    const remainingStock = changeStock[denomination] - numNotes;
+    changeStock[denomination] = Math.max(remainingStock, 0);
+    change -= numNotes * parseInt(denomination);
+  }
+}
+
+function displayChangeOutput(change) {
+  const changeOutputElement = document.getElementById("changeOutput");
+
+  if (change > 0) {
+    let changeHtml = "<p>Change:</p><ul>";
+
+    for (let denomination in changeStock) {
+      const numNotes = Math.floor(change / parseInt(denomination));
+      if (numNotes > 0) {
+        changeHtml += `<li>${numNotes} x Rp. ${denomination}</li>`;
+      }
+      change -= numNotes * parseInt(denomination);
+    }
+
+    changeHtml += "</ul>";
+    changeOutputElement.innerHTML = changeHtml;
+  } else {
+    changeOutputElement.innerHTML = ""; // Clear the change output if no change
+  }
 }
 
 function processVending() {
@@ -47,13 +84,31 @@ function processVending() {
     displayOutput("Insufficient funds. Please provide more money.");
   } else {
     const change = providedMoney - totalSelectedPrice;
-    if (change > 0) {
-      displayOutput(`Change: $${change.toFixed(2)}`);
+
+    // Check if there is enough change in the stock
+    if (change > 0 && isChangeAvailable(change)) {
+      updateChangeStock(change);
+      displayChangeOutput(change);
+      displayOutput("Transaction successful. Enjoy your items!");
+      resetVendingMachine();
+    } else if (change > 0) {
+      displayOutput("Sorry, the vending machine doesn't have enough change.");
     } else {
       displayOutput("Transaction successful. Enjoy your items!");
       resetVendingMachine();
     }
   }
+}
+
+function isChangeAvailable(change) {
+  for (let denomination in changeStock) {
+    const numNotes = Math.floor(change / parseInt(denomination));
+    if (numNotes > changeStock[denomination]) {
+      return false;
+    }
+    change -= numNotes * parseInt(denomination);
+  }
+  return change === 0;
 }
 
 document.querySelectorAll(".money-option").forEach(function (moneyOption) {
