@@ -9,108 +9,166 @@
 </head>
 
 <body class="mx-auto">
-  <div class="container mx-auto p-4 bg-slate-500">
+  <div class="container mx-auto p-4 bg-gray-300">
     <h1 class="text-3xl font-bold text-center">
       Vending Machine Ramen
     </h1>
 
     <div class="flex flex-row gap-3">
-      <div class="flex flex-col basis-2/3">
+      <div class="flex flex-col basis-2/3 bg-dark p-3">
+        <!-- Food Items -->
         <div class="basis-2/5 pt-3">
-          <h3>Food Items</h3>
+          <h2 class="font-bold text-xl pb-2 text-white">Food Items</h2>
           <div class="flex flex-row gap-2">
-            <button class="basis-1/3 max-w-sm h-auto overflow-hidden shadow-lg rounded-lg itemButton"
-              onclick="selectItem('food', 'Item1')">
-              <img class="w-full" src="img/menu/Tori Ramen/tori1.jpg" alt="Sunset in the mountains">
+            <button class="basis-1/3 max-w-sm h-48 overflow-hidden shadow-lg rounded-lg itemButton bg-slate-200"
+              onclick="selectItem('food', 'tori1')">
+              <img class="w-44 h-20" src="img/menu/Tori Ramen/tori1.jpg" alt="Sunset in the mountains">
               <div class="px-3 text-left">
-                <div class="font-bold text-lg">Tori Ramen 1</div>
+                <div class="font-bold text-lg">Tori-Shio Ramen</div>
               </div>
               <div class="px-3 pb-2">
-                <p class="py-1 text-left text-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
                 <div
                   class="bg-green-100 text-green-800 me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">
                   <span class="text-xs font-medium">Rp.
-                    10,000</span>
+                    20,000</span>
                 </div>
               </div>
             </button>
-            <button class="basis-1/3 max-w-sm h-auto overflow-hidden shadow-lg rounded-lg itemButton"
-              onclick="selectItem('food', 'Item2')">
-              <img class="w-full" src="img/menu/Tori Ramen/tori1.jpg" alt="Sunset in the mountains">
+            <button class="basis-1/3 max-w-sm h-48 overflow-hidden shadow-lg rounded-lg itemButton bg-slate-200"
+              onclick="selectItem('food', 'tori3')">
+              <img class="w-44 h-20" src="img/menu/Tori Ramen/tori3.jpg" alt="Sunset in the mountains">
               <div class="px-3 text-left">
-                <div class="font-bold text-lg">Tori Ramen 1</div>
+                <div class="font-bold text-lg">Tori-Shoyu Ramen</div>
               </div>
               <div class="px-3 pb-2">
-                <p class="py-1 text-left text-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
                 <div
                   class="bg-green-100 text-green-800 me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">
                   <span class="text-xs font-medium">Rp.
-                    10,000</span>
+                    25,000</span>
                 </div>
               </div>
             </button>
-            <button class="basis-1/3 max-w-sm h-auto overflow-hidden shadow-lg rounded-lg itemButton"
-              onclick="selectItem('food', 'Item3')">
-              <img class="w-full" src="img/menu/Tori Ramen/tori1.jpg" alt="Sunset in the mountains">
+            <button class="basis-1/3 max-w-sm h-48 overflow-hidden shadow-lg rounded-lg itemButton bg-slate-200"
+              onclick="selectItem('food', 'tsuke1')">
+              <img class="w-44 h-20" src="img/menu/Tsuke Men/tsuke1.jpg" alt="Sunset in the mountains">
               <div class="px-3 text-left">
-                <div class="font-bold text-lg">Tori Ramen 1</div>
+                <div class="font-bold text-lg">Tsuke-men Ramen</div>
               </div>
               <div class="px-3 pb-2">
-                <p class="py-1 text-left text-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
                 <div
                   class="bg-green-100 text-green-800 me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">
                   <span class="text-xs font-medium">Rp.
-                    10,000</span>
+                    30,000</span>
+                </div>
+              </div>
+            </button>
+          </div>
+          <div class="flex flex-row gap-2 pt-3">
+            <button class="basis-1/3 max-w-sm h-48 overflow-hidden shadow-lg rounded-lg itemButton bg-slate-200"
+              onclick="selectItem('food', 'tsuke3')">
+              <img class="w-44 h-20" src="img/menu/Tsuke Men/tsuke3.jpg" alt="Sunset in the mountains">
+              <div class="px-3 text-left">
+                <div class="font-bold text-lg">Spicy Tsuke-Men</div>
+              </div>
+              <div class="px-3 pb-2">
+                <div
+                  class="bg-green-100 text-green-800 me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">
+                  <span class="text-xs font-medium">Rp.
+                    35,000</span>
+                </div>
+              </div>
+            </button>
+            <button class="basis-1/3 max-w-sm h-48 overflow-hidden shadow-lg rounded-lg itemButton bg-slate-200"
+              onclick="selectItem('food', 'tori3')">
+              <img class="w-44 h-20" src="img/menu/Abura Soba/abura1.jpg" alt="Sunset in the mountains">
+              <div class="px-3 text-left">
+                <div class="font-bold text-lg">Abura Soba Chicken</div>
+              </div>
+              <div class="px-3 pb-2">
+                <div
+                  class="bg-green-100 text-green-800 me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">
+                  <span class="text-xs font-medium">Rp.
+                    40,000</span>
+                </div>
+              </div>
+            </button>
+            <button class="basis-1/3 max-w-sm h-48 overflow-hidden shadow-lg rounded-lg itemButton bg-slate-200"
+              onclick="selectItem('food', 'abura2')">
+              <img class="w-44 h-20" src="img/menu/Abura Soba/abura2.jpg" alt="Sunset in the mountains">
+              <div class="px-3 text-left">
+                <div class="font-bold text-lg">Spicy Abura Soba</div>
+              </div>
+              <div class="px-3 pb-2">
+                <div
+                  class="bg-green-100 text-green-800 me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">
+                  <span class="text-xs font-medium">Rp.
+                    45,000</span>
                 </div>
               </div>
             </button>
           </div>
         </div>
-        <div class="basis-2/5 pt-3">
-          <h3>Drink Items</h3>
+        <!-- Food Items -->
+
+        <!-- Drink Items -->
+        <div class="basis-2/5 pt-5">
+          <h2 class="font-bold text-xl pb-2 text-white">Drink Items</h2>
           <div class="flex flex-row gap-2">
-            <button class="basis-1/3 max-w-sm h-auto overflow-hidden shadow-lg rounded-lg itemButton"
-              onclick="selectItem('drink', 'ItemA')">
-              <img class="w-full" src="img/menu/Tori Ramen/tori1.jpg" alt="Sunset in the mountains">
+            <button class="basis-1/3 max-w-sm h-44 overflow-hidden shadow-lg rounded-lg itemButton bg-slate-200"
+              onclick="selectItem('drink', 'drink1')">
+              <img class="w-44 h-20" src="img/menu/Drink/Blue Raspberry Ocean.png" alt="Sunset in the mountains">
               <div class="px-3 text-left">
-                <div class="font-bold text-lg">Tori Ramen 1</div>
+                <div class="font-bold text-lg">Blue Raspberry</div>
               </div>
               <div class="px-3 pb-2">
-                <p class="py-1 text-left text-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
                 <div
                   class="bg-green-100 text-green-800 me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">
                   <span class="text-xs font-medium">Rp.
-                    10,000</span>
+                    15,000</span>
                 </div>
               </div>
             </button>
-            <button class="basis-1/3 max-w-sm h-auto overflow-hidden shadow-lg rounded-lg itemButton"
-              onclick="selectItem('drink', 'ItemB')">
-              <img class="w-full" src="img/menu/Tori Ramen/tori1.jpg" alt="Sunset in the mountains">
+            <button class="basis-1/3 max-w-sm h-44 overflow-hidden shadow-lg rounded-lg itemButton bg-slate-200"
+              onclick="selectItem('drink', 'drink2')">
+              <img class="w-44 h-20" src="img/menu/Drink/BLUSHING ROSE FIZZ.png" alt="Sunset in the mountains">
               <div class="px-3 text-left">
-                <div class="font-bold text-lg">Tori Ramen 1</div>
+                <div class="font-bold text-lg">Blushing Rose Fizz</div>
               </div>
               <div class="px-3 pb-2">
-                <p class="py-1 text-left text-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
                 <div
                   class="bg-green-100 text-green-800 me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">
                   <span class="text-xs font-medium">Rp.
-                    10,000</span>
+                    20,000</span>
                 </div>
               </div>
             </button>
-            <button class="basis-1/3 max-w-sm h-auto overflow-hidden shadow-lg rounded-lg itemButton"
-              onclick="selectItem('drink', 'ItemC')">
-              <img class="w-full" src="img/menu/Tori Ramen/tori1.jpg" alt="Sunset in the mountains">
+            <button class="basis-1/3 max-w-sm h-44 overflow-hidden shadow-lg rounded-lg itemButton bg-slate-200"
+              onclick="selectItem('drink', 'drink3')">
+              <img class="w-44 h-20" src="img/menu/Drink/Iced Matcha Latte.png" alt="Sunset in the mountains">
               <div class="px-3 text-left">
-                <div class="font-bold text-lg">Tori Ramen 1</div>
+                <div class="font-bold text-lg">Iced Matcha Latte</div>
               </div>
               <div class="px-3 pb-2">
-                <p class="py-1 text-left text-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
                 <div
                   class="bg-green-100 text-green-800 me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">
                   <span class="text-xs font-medium">Rp.
-                    10,000</span>
+                    15,000</span>
+                </div>
+              </div>
+            </button>
+          </div>
+          <div class="flex flex-row gap-2 pt-3">
+            <button class="basis-1/3 max-w-sm h-44 overflow-hidden shadow-lg rounded-lg itemButton bg-slate-200"
+              onclick="selectItem('drink', 'drink4')">
+              <img class="w-44 h-20" src="img/menu/Drink/POMEGRANATE BLOSSOM.png" alt="Sunset in the mountains">
+              <div class="px-3 text-left">
+                <div class="font-bold text-lg">Pomegranate Blossom</div>
+              </div>
+              <div class="px-3 pb-2">
+                <div
+                  class="bg-green-100 text-green-800 me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">
+                  <span class="text-xs font-medium">Rp.
+                    20,000</span>
                 </div>
               </div>
             </button>
@@ -121,7 +179,7 @@
         <img src="img/Megumi Ramen logo.png" class="h-36 mx-auto" alt="">
         <div>
           <label for="money" class="block text-sm font-medium leading-6 text-gray-900">Masukkan Uang</label>
-          <div class="p-10">
+          <div class="py-4">
             <div class="dropdown inline-block relative">
               <button class="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
                 <span class="mr-1">Dropdown</span>
@@ -143,10 +201,12 @@
               </ul>
             </div>
 
-            <div id="selectedMoneyImage"></div>
+            <div class="py-2" id="selectedMoneyImage"></div>
 
-            <button onclick="processVending()">Purchase</button>
-            <button onclick="cancelTransaction()">Cancel</button>
+            <button class="button p-3 bg-green-800 text-green-50 rounded-xl font-semibold hover:bg-green-900"
+              onclick="processVending()">Purchase</button>
+            <button class="button p-3 ml-2 bg-red-800 text-green-50 rounded-xl font-semibold hover:bg-red-900"
+              onclick="cancelTransaction()">Cancel</button>
 
             <div id="output"></div>
 
