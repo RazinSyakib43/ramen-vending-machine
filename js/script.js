@@ -29,6 +29,7 @@ function processVending() {
   }
 
   const providedMoney = parseFloat(selectedMoneyElement.dataset.value);
+
   const selectedItems = Array.from(selectedItemsTable.rows).map(
     (row) => row.cells[0].innerHTML
   );
@@ -64,6 +65,12 @@ document.querySelectorAll(".money-option").forEach(function (moneyOption) {
 
     // Add the 'selected' class to the clicked money option
     moneyOption.classList.add("selected");
+
+    const selectedMoneyImage = moneyOption.querySelector("img").cloneNode(true);
+    document.getElementById("selectedMoneyImage").innerHTML = "";
+    document
+      .getElementById("selectedMoneyImage")
+      .appendChild(selectedMoneyImage);
   });
 });
 
