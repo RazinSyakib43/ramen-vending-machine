@@ -65,6 +65,8 @@ function displayChangeStockOutput() {
   changeStockOutputElement.innerHTML = changeStockHtml;
 }
 
+let selectedMoneyValue = null;
+
 document.querySelectorAll(".money-option").forEach(function (moneyOption) {
   moneyOption.addEventListener("click", function () {
     document.querySelectorAll(".money-option").forEach(function (option) {
@@ -72,6 +74,7 @@ document.querySelectorAll(".money-option").forEach(function (moneyOption) {
     });
 
     moneyOption.classList.add("selected");
+    selectedMoneyValue = moneyOption.dataset.value;
 
     const selectedMoneyImage = moneyOption.querySelector("img").cloneNode(true);
     document.getElementById("selectedMoneyImage").innerHTML = "";
@@ -169,6 +172,16 @@ function displayChangeOutput(change) {
 }
 
 function cancelTransaction() {
+  document.querySelectorAll(".money-option").forEach(function (option) {
+    option.classList.remove("selected");
+  });
+
+  if (selectedMoneyValue) {
+    document
+      .querySelector(`.money-option[data-value="${selectedMoneyValue}"]`)
+      .classList.add("selected");
+  }
+
   resetVendingMachine();
 }
 
