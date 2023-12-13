@@ -1,12 +1,8 @@
 const prices = {
-  tori1: 15000,
-  tsuke1: 30000,
-  Item1: 10000,
-  Item2: 10000,
-  Item3: 10000,
-  ItemA: 10000,
-  ItemB: 10000,
-  ItemC: 10000,
+  ToriShioRamen: 20000,
+  ToriShoyuRamen: 20000,
+  TsukemenRamen: 20000,
+  AburaSobaChicken: 20000,
 };
 
 let changeStock = {
@@ -27,6 +23,10 @@ function selectItem(type, itemName) {
   const cell2 = row.insertCell(1);
   cell1.innerHTML = itemName;
   cell2.innerHTML = `${formatNumber(price)}`;
+  document.getElementById("itemButton").disabled = true;
+  document.getElementById("itemButton1").disabled = true;
+  document.getElementById("itemButton2").disabled = true;
+  document.getElementById("itemButton3").disabled = true;
 }
 
 function formatNumber(number) {
@@ -37,9 +37,11 @@ function formatNumber(number) {
 }
 
 function updateChangeStock(change) {
-  let updatedStock = { ...changeStock }; // Make a copy of the current stock
+  let updatedStock = { ...changeStock };
 
-  for (let denomination in updatedStock) {
+  const sortedDenominations = Object.keys(updatedStock).sort((a, b) => b - a);
+
+  for (let denomination of sortedDenominations) {
     const numNotes = Math.floor(change / parseInt(denomination));
     const remainingStock = updatedStock[denomination] - numNotes;
     updatedStock[denomination] = Math.max(remainingStock, 0);
@@ -65,6 +67,8 @@ function displayChangeStockOutput() {
   changeStockOutputElement.innerHTML = changeStockHtml;
 }
 
+let selectedMoneyValue = null;
+
 document.querySelectorAll(".money-option").forEach(function (moneyOption) {
   moneyOption.addEventListener("click", function () {
     document.querySelectorAll(".money-option").forEach(function (option) {
@@ -72,6 +76,7 @@ document.querySelectorAll(".money-option").forEach(function (moneyOption) {
     });
 
     moneyOption.classList.add("selected");
+    selectedMoneyValue = moneyOption.dataset.value;
 
     const selectedMoneyImage = moneyOption.querySelector("img").cloneNode(true);
     document.getElementById("selectedMoneyImage").innerHTML = "";
@@ -81,17 +86,17 @@ document.querySelectorAll(".money-option").forEach(function (moneyOption) {
   });
 });
 
+const initialChangeStock = { ...changeStock };
+
 function processVending() {
-    const selectedMoneyElement = document.querySelector(
-      ".money-option.selected"
-    );
+  const selectedMoneyElement = document.querySelector(".money-option.selected");
 
-    if (!selectedMoneyElement) {
-      displayOutput("Please select a money option.");
-      return;
-    }
+  if (!selectedMoneyElement) {
+    displayOutput("Please select a money option.");
+    return;
+  }
 
-    const providedMoney = parseFloat(selectedMoneyElement.dataset.value);
+  const providedMoney = parseFloat(selectedMoneyElement.dataset.value);
 
   const selectedItems = Array.from(selectedItemsTable.rows).map(
     (row) => row.cells[0].innerHTML
@@ -110,12 +115,19 @@ function processVending() {
     displayOutput("Insufficient funds. Please provide more money.");
   } else {
     const change = providedMoney - totalSelectedPrice;
-
     if (change > 0 && isChangeAvailable(change)) {
       updateChangeStock(change);
       displayChangeOutput(change);
-      displayOutput("Transaksi Berhasil! Silahkan menikmati makanan/minuman anda!");
-      resetVendingMachine();
+      displayOutput(
+        "Transaksi Berhasil! Silahkan menikmati makanan/minuman anda!"
+      );
+
+      disableFoodMenuButtons();
+
+      setTimeout(() => {
+        resetVendingMachine();
+        enableFoodMenuButtons();
+      }, 5000);
     } else if (change > 0) {
       displayOutput("Sorry, the vending machine doesn't have enough change.");
     } else {
@@ -144,7 +156,9 @@ function displayChangeOutput(change) {
   if (change > 0) {
     let changeHtml = "<p>Uang Kembalian:</p><ul>";
 
-    for (let denomination in changeStock) {
+    const sortedDenominations = Object.keys(changeStock).sort((a, b) => b - a);
+
+    for (let denomination of sortedDenominations) {
       const numNotes = Math.floor(change / parseInt(denomination));
       if (numNotes > 0) {
         changeHtml += `<li>${numNotes} x ${formatNumber(denomination)}</li>`;
@@ -159,8 +173,34 @@ function displayChangeOutput(change) {
   }
 }
 
+document
+  .getElementById("cancelButton")
+  .addEventListener("click", cancelTransaction);
+
 function cancelTransaction() {
+  const selectedMoneyElement = document.querySelector(".money-option.selected");
+
+  if (selectedMoneyElement) {
+    selectedMoneyElement.classList.remove("selected");
+  }
+
+  document.getElementById("selectedMoneyImage").innerHTML = "";
+
   resetVendingMachine();
+}
+
+function disableFoodMenuButtons() {
+  document.getElementById("itemButton").disabled = true;
+  document.getElementById("itemButton1").disabled = true;
+  document.getElementById("itemButton2").disabled = true;
+  document.getElementById("itemButton3").disabled = true;
+}
+
+function enableFoodMenuButtons() {
+  document.getElementById("itemButton").disabled = false;
+  document.getElementById("itemButton1").disabled = false;
+  document.getElementById("itemButton2").disabled = false;
+  document.getElementById("itemButton3").disabled = false;
 }
 
 function resetVendingMachine() {
@@ -170,11 +210,14 @@ function resetVendingMachine() {
     .getElementById("selectedItems")
     .getElementsByTagName("tbody")[0];
   selectedItemsTable.innerHTML = "";
+
+  const changeOutputElement = document.getElementById("changeOutput");
+  changeOutputElement.innerHTML = "";
+
+  enableFoodMenuButtons();
 }
 
-// Display initial change stock
 displayChangeStockOutput();
-
 
 function displayChangeStockOutput() {
   const changeStockOutputElement = document.getElementById("changeStockOutput");
