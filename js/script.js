@@ -173,16 +173,18 @@ function displayChangeOutput(change) {
   }
 }
 
-function cancelTransaction() {
-  document.querySelectorAll(".money-option").forEach(function (option) {
-    option.classList.remove("selected");
-  });
+document
+  .getElementById("cancelButton")
+  .addEventListener("click", cancelTransaction);
 
-  if (selectedMoneyValue) {
-    document
-      .querySelector(`.money-option[data-value="${selectedMoneyValue}"]`)
-      .classList.add("selected");
+function cancelTransaction() {
+  const selectedMoneyElement = document.querySelector(".money-option.selected");
+
+  if (selectedMoneyElement) {
+    selectedMoneyElement.classList.remove("selected");
   }
+
+  document.getElementById("selectedMoneyImage").innerHTML = "";
 
   resetVendingMachine();
 }
