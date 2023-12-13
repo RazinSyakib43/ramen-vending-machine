@@ -708,11 +708,6 @@ video {
   border-bottom-left-radius: 0.25rem;
 }
 
-.rounded-t {
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
-}
-
 .border {
   border-width: 1px;
 }
@@ -927,14 +922,6 @@ body {
 .hover\:bg-red-900:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(127 29 29 / var(--tw-bg-opacity));
-}
-
-.disabled\:opacity-75:disabled {
-  opacity: 0.75;
-}
-
-.disabled\:opacity-25:disabled {
-  opacity: 0.25;
 }
 
 @media (prefers-color-scheme: dark) {

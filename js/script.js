@@ -144,7 +144,9 @@ function displayChangeOutput(change) {
   if (change > 0) {
     let changeHtml = "<p>Uang Kembalian:</p><ul>";
 
-    for (let denomination in changeStock) {
+    const sortedDenominations = Object.keys(changeStock).sort((a, b) => b - a);
+
+    for (let denomination of sortedDenominations) {
       const numNotes = Math.floor(change / parseInt(denomination));
       if (numNotes > 0) {
         changeHtml += `<li>${numNotes} x ${formatNumber(denomination)}</li>`;
