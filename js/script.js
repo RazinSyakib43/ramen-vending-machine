@@ -6,10 +6,10 @@ const prices = {
 };
 
 let changeStock = {
-  5000: 20,
-  10000: 20,
-  20000: 20,
-  50000: 20,
+  5000: 5,
+  10000: 5,
+  20000: 5,
+  50000: 5,
 };
 
 const selectedItemsTable = document
@@ -107,20 +107,18 @@ function processVending() {
   );
 
   if (isNaN(providedMoney) || providedMoney < 0) {
-    displayOutput("Please enter a valid amount.");
+    alert("Please enter a valid amount.");
     return;
   }
 
   if (providedMoney < totalSelectedPrice) {
-    displayOutput("Insufficient funds. Please provide more money.");
+    alert("Dana tidak mencukupi. Mohon sediakan lebih banyak uang.");
   } else {
     const change = providedMoney - totalSelectedPrice;
     if (change > 0 && isChangeAvailable(change)) {
       updateChangeStock(change);
       displayChangeOutput(change);
-      displayOutput(
-        "Transaksi Berhasil! Silahkan menikmati makanan/minuman anda!"
-      );
+      alert("Transaksi Berhasil! Silahkan menikmati makanan/minuman anda!");
 
       disableFoodMenuButtons();
 
@@ -129,25 +127,31 @@ function processVending() {
         enableFoodMenuButtons();
       }, 5000);
     } else if (change > 0) {
-      displayOutput("Sorry, the vending machine doesn't have enough change.");
+      alert("Stok Uang Kembalian di Vending Machine telah habis.");
     } else {
-      displayOutput(
-        "Transaksi Berhasil! Silahkan menikmati makanan/minuman anda!"
+      alert(
+        "Uang Pas dan Transaksi Berhasil! Silahkan menikmati makanan/minuman anda!"
       );
       resetVendingMachine();
     }
   }
 }
 
+
 function isChangeAvailable(change) {
-  for (let denomination in changeStock) {
-    const numNotes = Math.floor(change / parseInt(denomination));
+  let remainingChange = change;
+
+  const sortedDenominations = Object.keys(changeStock).sort((a, b) => b - a);
+
+  for (let denomination of sortedDenominations) {
+    const numNotes = Math.floor(remainingChange / parseInt(denomination));
     if (numNotes > changeStock[denomination]) {
       return false;
     }
-    change -= numNotes * parseInt(denomination);
+    remainingChange -= numNotes * parseInt(denomination);
   }
-  return change === 0;
+
+  return remainingChange === 0;
 }
 
 function displayChangeOutput(change) {
