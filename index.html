@@ -189,7 +189,8 @@
               </button>
               <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
                 <li class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap money-option"
-                  data-value="5000"><img src="img/uang/5000.jpg" alt=""></li>
+                  data-value="5000">
+                  <img src="img/uang/5000.jpg" alt=""></li>
                 <li class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap money-option"
                   data-value="10000"><img src="img/uang/10000.jpg" alt=""></li>
                 <li class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap money-option"
@@ -206,21 +207,22 @@
             <button class="button p-3 bg-green-800 text-green-50 rounded-xl font-semibold hover:bg-green-900"
               onclick="processVending()">Purchase</button>
             <button class="button p-3 ml-2 bg-red-800 text-green-50 rounded-xl font-semibold hover:bg-red-900"
-              onclick="cancelTransaction()">Cancel</button>
+              onclick="resetVendingMachine()">Cancel</button>
 
-            <div id="output"></div>
+            <div id="output" class="pt-3"></div>
 
             <table id="selectedItems">
               <thead>
                 <tr>
-                  <th>Selected Items</th>
-                  <th>Price</th>
+                  <th>Item</th>
+                  <th>Harga</th>
                 </tr>
               </thead>
               <tbody></tbody>
             </table>
 
-            <div id="changeOutput"></div>
+            <div id="changeStockOutput" class="pt-3"></div>
+            <div id="changeOutput" class="pt-3"></div>
           </div>
 
         </div>
