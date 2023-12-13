@@ -1,10 +1,19 @@
 const prices = {
-  Item1: 5.0,
-  Item2: 7.5,
-  Item3: 10.0,
-  ItemA: 2.5,
-  ItemB: 3.0,
-  ItemC: 4.5,
+  tori1: 15000,
+  tsuke1: 30000,
+  Item1: 10000,
+  Item2: 10000,
+  Item3: 10000,
+  ItemA: 10000,
+  ItemB: 10000,
+  ItemC: 10000,
+};
+
+let changeStock = {
+  5000: 20,
+  10000: 20,
+  20000: 20,
+  50000: 20,
 };
 
 const selectedItemsTable = document
@@ -17,11 +26,73 @@ function selectItem(type, itemName) {
   const cell1 = row.insertCell(0);
   const cell2 = row.insertCell(1);
   cell1.innerHTML = itemName;
-  cell2.innerHTML = `$${price.toFixed(2)}`;
+  cell2.innerHTML = `${formatNumber(price)}`;
 }
 
+function formatNumber(number) {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  }).format(number);
+}
+
+function updateChangeStock(change) {
+  let updatedStock = { ...changeStock }; // Make a copy of the current stock
+
+  for (let denomination in updatedStock) {
+    const numNotes = Math.floor(change / parseInt(denomination));
+    const remainingStock = updatedStock[denomination] - numNotes;
+    updatedStock[denomination] = Math.max(remainingStock, 0);
+    change -= numNotes * parseInt(denomination);
+  }
+
+  changeStock = updatedStock;
+
+  displayChangeStockOutput();
+}
+
+function displayChangeStockOutput() {
+  const changeStockOutputElement = document.getElementById("changeStockOutput");
+  let changeStockHtml = "<p>Stok Uang Kembalian:</p><ul>";
+
+  for (let denomination in changeStock) {
+    changeStockHtml += `<li>${formatNumber(denomination)}: ${
+      changeStock[denomination]
+    } notes</li>`;
+  }
+
+  changeStockHtml += "</ul>";
+  changeStockOutputElement.innerHTML = changeStockHtml;
+}
+
+document.querySelectorAll(".money-option").forEach(function (moneyOption) {
+  moneyOption.addEventListener("click", function () {
+    document.querySelectorAll(".money-option").forEach(function (option) {
+      option.classList.remove("selected");
+    });
+
+    moneyOption.classList.add("selected");
+
+    const selectedMoneyImage = moneyOption.querySelector("img").cloneNode(true);
+    document.getElementById("selectedMoneyImage").innerHTML = "";
+    document
+      .getElementById("selectedMoneyImage")
+      .appendChild(selectedMoneyImage);
+  });
+});
+
 function processVending() {
-  const providedMoney = parseFloat(document.getElementById("money").value);
+    const selectedMoneyElement = document.querySelector(
+      ".money-option.selected"
+    );
+
+    if (!selectedMoneyElement) {
+      displayOutput("Please select a money option.");
+      return;
+    }
+
+    const providedMoney = parseFloat(selectedMoneyElement.dataset.value);
+
   const selectedItems = Array.from(selectedItemsTable.rows).map(
     (row) => row.cells[0].innerHTML
   );
@@ -39,12 +110,52 @@ function processVending() {
     displayOutput("Insufficient funds. Please provide more money.");
   } else {
     const change = providedMoney - totalSelectedPrice;
-    if (change > 0) {
-      displayOutput(`Change: $${change.toFixed(2)}`);
+
+    if (change > 0 && isChangeAvailable(change)) {
+      updateChangeStock(change);
+      displayChangeOutput(change);
+      displayOutput("Transaksi Berhasil! Silahkan menikmati makanan/minuman anda!");
+      resetVendingMachine();
+    } else if (change > 0) {
+      displayOutput("Sorry, the vending machine doesn't have enough change.");
     } else {
-      displayOutput("Transaction successful. Enjoy your items!");
+      displayOutput(
+        "Transaksi Berhasil! Silahkan menikmati makanan/minuman anda!"
+      );
       resetVendingMachine();
     }
+  }
+}
+
+function isChangeAvailable(change) {
+  for (let denomination in changeStock) {
+    const numNotes = Math.floor(change / parseInt(denomination));
+    if (numNotes > changeStock[denomination]) {
+      return false;
+    }
+    change -= numNotes * parseInt(denomination);
+  }
+  return change === 0;
+}
+
+function displayChangeOutput(change) {
+  const changeOutputElement = document.getElementById("changeOutput");
+
+  if (change > 0) {
+    let changeHtml = "<p>Uang Kembalian:</p><ul>";
+
+    for (let denomination in changeStock) {
+      const numNotes = Math.floor(change / parseInt(denomination));
+      if (numNotes > 0) {
+        changeHtml += `<li>${numNotes} x ${formatNumber(denomination)}</li>`;
+      }
+      change -= numNotes * parseInt(denomination);
+    }
+
+    changeHtml += "</ul>";
+    changeOutputElement.innerHTML = changeHtml;
+  } else {
+    changeOutputElement.innerHTML = "";
   }
 }
 
@@ -53,11 +164,30 @@ function cancelTransaction() {
 }
 
 function resetVendingMachine() {
-  document.getElementById("money").value = "";
   document.getElementById("output").innerText = "";
+
+  const selectedItemsTable = document
+    .getElementById("selectedItems")
+    .getElementsByTagName("tbody")[0];
   selectedItemsTable.innerHTML = "";
 }
 
-function displayOutput(message) {
-  document.getElementById("output").innerText = message;
+// Display initial change stock
+displayChangeStockOutput();
+
+
+function displayChangeStockOutput() {
+  const changeStockOutputElement = document.getElementById("changeStockOutput");
+  let changeStockHtml = "<p>Stok Uang Kembalian</p><ul>";
+
+  for (let denomination in changeStock) {
+    changeStockHtml += `<li>${formatNumber(denomination)}: ${
+      changeStock[denomination]
+    } notes</li>`;
+  }
+
+  changeStockHtml += "</ul>";
+  changeStockOutputElement.innerHTML = changeStockHtml;
 }
+
+displayChangeStockOutput();

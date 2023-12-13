@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    max-width: 700px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
