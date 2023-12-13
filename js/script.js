@@ -39,7 +39,9 @@ function formatNumber(number) {
 function updateChangeStock(change) {
   let updatedStock = { ...changeStock };
 
-  for (let denomination in updatedStock) {
+  const sortedDenominations = Object.keys(updatedStock).sort((a, b) => b - a);
+
+  for (let denomination of sortedDenominations) {
     const numNotes = Math.floor(change / parseInt(denomination));
     const remainingStock = updatedStock[denomination] - numNotes;
     updatedStock[denomination] = Math.max(remainingStock, 0);
