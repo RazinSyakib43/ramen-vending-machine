@@ -7,6 +7,16 @@ const prices = {
   ItemC: 4000,
 };
 
+// function disabledButton(buttonClicked) {
+//   const itemButtons = document.querySelectorAll("#itemButton");
+  
+//   itemButtons.forEach((buttonInfo, index) => {
+//     if (buttonInfo.id === buttonClicked.id) {
+//       buttonInfo.disabled = true;
+//     }
+//   });
+// } 
+
 function selectItem(type, itemName) {
   const price = prices[itemName];
   const selectedItemList = document
@@ -16,24 +26,14 @@ function selectItem(type, itemName) {
   const listItem = document.createElement("li");
   listItem.textContent = `${itemName} - Rp. ${price}`;
   selectedItemList.appendChild(listItem);
-}
 
-function addDenomination(value) {
-  const moneyInput = document.getElementById("money");
+    // const itemButtons = document.querySelectorAll("#itemButton");
 
-  if (value === 1000) {
-    displayOutput("Sorry, this vending machine does not accept money of Rp1,000.");
-    setTimeout(() => {
-      clearErrorOutput();
-    }, 2000);
-    return;
-  }
-
-  moneyInput.value = (parseFloat(moneyInput.value) || 0) + value;
-}
-
-function clearErrorOutput() {
-  displayOutput("");
+    // itemButtons.forEach((buttonInfo, index) => {
+    //   if (buttonInfo.id === buttonClicked.id) {
+    //     buttonInfo.disabled = true;
+    //   }
+    // });
 }
 
 function processVending() {

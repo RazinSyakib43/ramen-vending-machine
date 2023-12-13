@@ -1,12 +1,8 @@
 const prices = {
-  tori1: 15000,
-  tsuke1: 30000,
-  Item1: 10000,
-  Item2: 10000,
-  Item3: 10000,
-  ItemA: 10000,
-  ItemB: 10000,
-  ItemC: 10000,
+  ToriShioRamen: 20000,
+  ToriShoyuRamen: 20000,
+  TsukemenRamen: 20000,
+  AburaSobaChicken: 20000,
 };
 
 let changeStock = {
@@ -27,6 +23,10 @@ function selectItem(type, itemName) {
   const cell2 = row.insertCell(1);
   cell1.innerHTML = itemName;
   cell2.innerHTML = `${formatNumber(price)}`;
+  document.getElementById("itemButton").disabled = true;
+  document.getElementById("itemButton1").disabled = true;
+  document.getElementById("itemButton2").disabled = true;
+  document.getElementById("itemButton3").disabled = true;
 }
 
 function formatNumber(number) {
