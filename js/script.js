@@ -37,7 +37,7 @@ function formatNumber(number) {
 }
 
 function updateChangeStock(change) {
-  let updatedStock = { ...changeStock }; // Make a copy of the current stock
+  let updatedStock = { ...changeStock };
 
   for (let denomination in updatedStock) {
     const numNotes = Math.floor(change / parseInt(denomination));
@@ -81,17 +81,17 @@ document.querySelectorAll(".money-option").forEach(function (moneyOption) {
   });
 });
 
+const initialChangeStock = { ...changeStock };
+
 function processVending() {
-    const selectedMoneyElement = document.querySelector(
-      ".money-option.selected"
-    );
+  const selectedMoneyElement = document.querySelector(".money-option.selected");
 
-    if (!selectedMoneyElement) {
-      displayOutput("Please select a money option.");
-      return;
-    }
+  if (!selectedMoneyElement) {
+    displayOutput("Please select a money option.");
+    return;
+  }
 
-    const providedMoney = parseFloat(selectedMoneyElement.dataset.value);
+  const providedMoney = parseFloat(selectedMoneyElement.dataset.value);
 
   const selectedItems = Array.from(selectedItemsTable.rows).map(
     (row) => row.cells[0].innerHTML
@@ -110,12 +110,19 @@ function processVending() {
     displayOutput("Insufficient funds. Please provide more money.");
   } else {
     const change = providedMoney - totalSelectedPrice;
-
     if (change > 0 && isChangeAvailable(change)) {
       updateChangeStock(change);
       displayChangeOutput(change);
-      displayOutput("Transaksi Berhasil! Silahkan menikmati makanan/minuman anda!");
-      resetVendingMachine();
+      displayOutput(
+        "Transaksi Berhasil! Silahkan menikmati makanan/minuman anda!"
+      );
+
+      disableFoodMenuButtons();
+
+      setTimeout(() => {
+        resetVendingMachine();
+        enableFoodMenuButtons();
+      }, 5000);
     } else if (change > 0) {
       displayOutput("Sorry, the vending machine doesn't have enough change.");
     } else {
@@ -165,6 +172,20 @@ function cancelTransaction() {
   resetVendingMachine();
 }
 
+function disableFoodMenuButtons() {
+  document.getElementById("itemButton").disabled = true;
+  document.getElementById("itemButton1").disabled = true;
+  document.getElementById("itemButton2").disabled = true;
+  document.getElementById("itemButton3").disabled = true;
+}
+
+function enableFoodMenuButtons() {
+  document.getElementById("itemButton").disabled = false;
+  document.getElementById("itemButton1").disabled = false;
+  document.getElementById("itemButton2").disabled = false;
+  document.getElementById("itemButton3").disabled = false;
+}
+
 function resetVendingMachine() {
   document.getElementById("output").innerText = "";
 
@@ -172,11 +193,15 @@ function resetVendingMachine() {
     .getElementById("selectedItems")
     .getElementsByTagName("tbody")[0];
   selectedItemsTable.innerHTML = "";
+
+  const changeOutputElement = document.getElementById("changeOutput");
+  changeOutputElement.innerHTML = "";
+
+  changeStock = { ...initialChangeStock };
+  displayChangeStockOutput();
 }
 
-// Display initial change stock
 displayChangeStockOutput();
-
 
 function displayChangeStockOutput() {
   const changeStockOutputElement = document.getElementById("changeStockOutput");
