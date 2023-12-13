@@ -197,8 +197,7 @@ function resetVendingMachine() {
   const changeOutputElement = document.getElementById("changeOutput");
   changeOutputElement.innerHTML = "";
 
-  changeStock = { ...initialChangeStock };
-  displayChangeStockOutput();
+  enableFoodMenuButtons();
 }
 
 displayChangeStockOutput();
